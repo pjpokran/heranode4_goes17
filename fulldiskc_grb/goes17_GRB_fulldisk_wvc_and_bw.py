@@ -319,6 +319,18 @@ file_list = glob.glob('/whirlwind/goes17/wvc/namer/2*.jpg')
 file_list.sort()
 #print("file list is ",file_list)
 
+# 1 week // every 3rd image (337 by 3)
+thefile = open('/whirlwind/goes17/wvc/namer_week_temp.list', 'w')
+thelist = file_list[-1009::3]
+#print ("thelist is ",thelist)
+
+for item in thelist:
+    head, tail = os.path.split(item)
+    head, mid = os.path.split(head)
+    thefile.write(mid + '/' + tail + '\n')
+thefile.close
+os.rename('/whirlwind/goes17/wvc/namer_week_temp.list','/whirlwind/goes17/wvc/goes17_namer_loop_week.list')
+
 # 6h // 24 (36) images
 thefile = open('/whirlwind/goes17/wvc/namer_24_temp.list', 'w')
 thelist = file_list[-36:]
